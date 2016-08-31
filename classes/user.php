@@ -889,6 +889,12 @@ class tool_uploadusercli_user {
             if (!preg_match('/^cohort\d+$/', $field)) {
                 continue;
             }
+
+            // no cohort to add/create
+            if (empty($value)) {
+                continue;
+            }
+
             $addcohort = $value;
             if (!isset($cohorts[$addcohort])) {
                 if (is_number($addcohort)) {
@@ -993,6 +999,11 @@ class tool_uploadusercli_user {
                 // Course number.
                 $i = substr($field, 6);
                 $shortname = $value;
+
+                // nothing to do
+                if (empty($shortname)) {
+                    continue;
+                }
 
                 $course = $DB->get_record('course', array('shortname' => $shortname));
                 $course->groups = NULL;
