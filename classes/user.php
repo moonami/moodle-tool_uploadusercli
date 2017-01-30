@@ -1006,12 +1006,14 @@ class tool_uploadusercli_user {
                 }
 
                 $course = $DB->get_record('course', array('shortname' => $shortname));
-                $course->groups = NULL;
+
                 if (!$course) {
                     $this->set_status('unknowncourse',
                         new lang_string('unknowncourse', 'error', s($shortname)));
                     continue;
                 }
+
+                $course->groups = NULL;
                 $courseid = $course->id;
                 $coursecontext = context_course::instance($courseid);
 
